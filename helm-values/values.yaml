@@ -1,1 +1,21 @@
 # Put your Helm values here
+cat <<EOF > helm-values/values.yaml
+# Sample Helm values for Prometheus & Grafana
+prometheus:
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: false
+    resources:
+      requests:
+        memory: "400Mi"
+        cpu: "100m"
+grafana:
+  adminUser: admin
+  adminPassword: prom-123
+  service:
+    type: NodePort
+    port: 80
+  persistence:
+    enabled: true
+    size: 1Gi
+EOF
+

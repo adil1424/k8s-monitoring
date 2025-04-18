@@ -1,1 +1,26 @@
 {}
+cat <<EOF > dashboards/sample-dashboard.json
+{
+  "annotations": {
+    "list": []
+  },
+  "panels": [
+    {
+      "datasource": "\${DS_PROMETHEUS}",
+      "type": "gauge",
+      "title": "CPU Busy %",
+      "targets": [
+        {
+          "expr": "100 - (avg by(instance)(rate(node_cpu_seconds_total{mode='idle'}[5m])) * 100)",
+          "interval": "",
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 26,
+  "title": "Sample CPU Dashboard",
+  "version": 1
+}
+EOF
+
